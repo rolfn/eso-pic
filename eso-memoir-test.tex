@@ -1,0 +1,41 @@
+\errorcontextlines=100\relax
+\listfiles
+\documentclass[twoside,a4paper,showtrims]{memoir}
+%------------------------------------
+\stockaiii
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\setlength{\trimedge}{.25\trimedge}
+\setlength{\trimtop}{\stockheight}
+\addtolength{\trimtop}{-\paperheight}
+\setlength{\trimtop}{.25\trimtop}
+\checkandfixthelayout
+%------------------------------------
+\usepackage{eso-pic}
+\usepackage{pict2e,showframe}
+
+\AddToShipoutPicture{%
+  \AtPageLowerLeft{\circle*{40}}%
+  \AtPageUpperLeft{\circle*{40}}%
+  \AtTextLowerLeft{\circle*{15}}%
+  \AtTextUpperLeft{\circle*{15}}%
+  \AtStockLowerLeft{\circle*{40}}%
+  \AtStockUpperLeft{\circle*{40}}%
+  \AtStockCenter{\circle*{40}}%
+}
+ 
+\begin{document}  \Huge \bfseries
+
+\noindent
+\hrulefill First Page\hrulefill 
+\vfill
+\noindent 
+X \hfill X 
+\newpage 
+\noindent
+\hrulefill Second Page\hrulefill 
+\vfill
+\noindent 
+X \hfill X
+
+\end{document}
