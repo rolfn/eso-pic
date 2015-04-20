@@ -1,8 +1,8 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 1998-2010 by Rolf Niepraschk <Rolf.Niepraschk@gmx.de>
+% Copyright (C) 1998-2015 by Rolf Niepraschk <Rolf.Niepraschk@gmx.de>
 % -------------------------------------------------------------------
-% 
+%
 % This file may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.2
 % of this license or (at your option) any later version.
@@ -10,11 +10,11 @@
 %
 %    http://www.latex-project.org/lppl.txt
 %
-% and version 1.2 or later is part of all distributions of LaTeX 
+% and version 1.2 or later is part of all distributions of LaTeX
 % version 1999/12/01 or later.
 % and version 1.3 or later is part of all distributions of LaTeX
-% version 2003/12/01 or later. 
-% 
+% version 2003/12/01 or later.
+%
 % This work has the LPPL maintenance status "author-maintained".
 %
 % Please send error reports and suggestions for improvements to
@@ -25,7 +25,7 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2013/10/06 v2.0d eso-pic (RN)]
+%<package>   [2015/04/20 v2.0e eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -37,7 +37,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{751}
+% \CheckSum{757}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -59,8 +59,8 @@
 % ===================================================================
 %  @LaTeX-package-file{
 %    author         = {Rolf Niepraschk},
-%    version        = "v2.0a",
-%    date           = "08 Jun 2010",
+%    version        = "v2.0e",
+%    date           = "20 Apr 2015",
 %    filename       = "eso-pic.sty",
 %    address        = "",
 %    telephone      = "",
@@ -69,8 +69,8 @@
 %    keywords       = "LaTeX2e, \shipout, picture",
 %    dependences    = "atbegshi",
 %    supported      = "yes",
-%    docstring      = "LaTeX package which makes it easy to add some  
-%                       picture commands to every page." 
+%    docstring      = "LaTeX package which makes it easy to add some
+%                       picture commands to every page."
 %  }
 % ===================================================================
 % \fi
@@ -89,11 +89,11 @@
 %     the \pkgname{html} package suggested by Ross Moore and a licence note}
 %  \changes{v0.7}{2001/07/20}{New command \cmd{\AddToShipoutPicture*}}
 %  \changes{v1.0}{2002/07/03}{New commands \cmd{\LenToUnit},%
-%    \cmd{\AtPageUpperLeft}, \cmd{\AtPageCenter}, \cmd{\AtTextUpperLeft}, 
+%    \cmd{\AtPageUpperLeft}, \cmd{\AtPageCenter}, \cmd{\AtTextUpperLeft},
 %    and \cmd{\AtTextCenter}.}
-% \changes{v1.0c}{2002/10/30}{New command \cmd{\AtTextLowerLeft} and 
+% \changes{v1.0c}{2002/10/30}{New command \cmd{\AtTextLowerLeft} and
 %    corrections to \cmd{\AtTextUpperLeft}.}
-%  \changes{v1.1}{2002/11/07}{New commands and package options for 
+%  \changes{v1.1}{2002/11/07}{New commands and package options for
 %    background grids.}
 %  \changes{v1.1b}{2002/11/16}{New package options "texcoord" and "pscoord"}
 %  \changes{v1.1b}{2002/11/16}{New command \cmd{\AtPageLowerLeft}}
@@ -112,63 +112,63 @@
 %
 % \section{Introduction}
 %
-%  This package makes it easy to add some picture commands to every page 
+%  This package makes it easy to add some picture commands to every page
 %  at absolute positions.
 % \section{Usage}
 %   See also the example \LaTeX\ documents (|eso-*.tex|).
 %
 %  \subsection{Basic commands for adding \LaTeX{} stuff to the page background}
 %  \DescribeMacro{\AddToShipoutPictureBG} All the picture commands which are
-%  parameters of an \cs{AddToShipoutPictureBG} command will be added to the 
-%  internal macro \cs{ESO@HookIBG}. This macro is part of a 
-%  zero-length \texttt{picture} environment with basepoint at the lower left 
-%  corner of the page (default) or at the upper left corner 
-%  (package option "texcoord"). The \texttt{picture} environment will be 
+%  parameters of an \cs{AddToShipoutPictureBG} command will be added to the
+%  internal macro \cs{ESO@HookIBG}. This macro is part of a
+%  zero-length \texttt{picture} environment with basepoint at the lower left
+%  corner of the page (default) or at the upper left corner
+%  (package option "texcoord"). The \texttt{picture} environment will be
 %  shipped out at every new page.
-%  
-%  \DescribeMacro{\AddToShipoutPictureBG*} \cs{AddToShipoutPictureBG*} works like 
+%
+%  \DescribeMacro{\AddToShipoutPictureBG*} \cs{AddToShipoutPictureBG*} works like
 %  \cs{AddToShipoutPictureBG} but only for the current page. It used the internal
-%  macro \cs{ESO@HookIIBG} which contents will be removed 
+%  macro \cs{ESO@HookIIBG} which contents will be removed
 %  automatically.
-%  
-%  For compatibility the macros \cs{AddToShipoutPicture} and 
-%  \cs{AddToShipoutPicture*} are aliases for \cs{AddToShipoutPictureBG} 
+%
+%  For compatibility the macros \cs{AddToShipoutPicture} and
+%  \cs{AddToShipoutPicture*} are aliases for \cs{AddToShipoutPictureBG}
 %  and \cs{AddToShipoutPictureBG*}.
-%  
+%
 %  \DescribeMacro{\AddToShipoutPictureFG}
-%  \DescribeMacro{\AddToShipoutPictureFG*} Works like 
-%  \cs{AddToShipoutPictureBG} but the picture commands are on the top 
+%  \DescribeMacro{\AddToShipoutPictureFG*} Works like
+%  \cs{AddToShipoutPictureBG} but the picture commands are on the top
 %  oft the normal document content.
 %
-%  \DescribeMacro{\ClearShipoutPictureBG} A call of 
-%  \cs{ClearShipoutPictureBG} 
-%  clears the contents of \cs{ESO@HookIBG}. 
+%  \DescribeMacro{\ClearShipoutPictureBG} A call of
+%  \cs{ClearShipoutPictureBG}
+%  clears the contents of \cs{ESO@HookIBG}.
 %
-%  For compatibility the macro \cs{ClearShipoutPicture} 
+%  For compatibility the macro \cs{ClearShipoutPicture}
 %  is an alias for \cs{ClearShipoutPictureBG}.
-%  
-%  \DescribeMacro{\ClearShipoutPictureFG} A call of 
-%  \cs{ClearShipoutPictureFG} 
-%  clears the contents of \cs{ESO@HookIFG}. 
+%
+%  \DescribeMacro{\ClearShipoutPictureFG} A call of
+%  \cs{ClearShipoutPictureFG}
+%  clears the contents of \cs{ESO@HookIFG}.
 %
 %   \DescribeMacro{\LenToUnit} Allows a length as parameter to a picture
-%    command. Note that this macro is no more necessary when using 
+%    command. Note that this macro is no more necessary when using
 %      |\usepackage{picture}|.
 %
-%  \DescribeMacro{\gridSetup} 
+%  \DescribeMacro{\gridSetup}
 %   \cmd{\gridSetup}\oarg{gridunitname}\marg{gridunit}\marg{labelfactor}^^A
-%     \marg{griddelta} \marg{gridDelta}\marg{gap}. For details see the 
+%     \marg{griddelta} \marg{gridDelta}\marg{gap}. For details see the
 %     implementation section.\par\clearpage
 %  \DescribeMacro{\AtPageUpperLeft}
 %  \DescribeMacro{\AtPageLowerLeft}
-%  \DescribeMacro{\AtPageCenter} 
+%  \DescribeMacro{\AtPageCenter}
 %  \DescribeMacro{\AtTextUpperLeft}
 %  \DescribeMacro{\AtTextLowerLeft}
 %  \DescribeMacro{\AtTextCenter}
 %  \DescribeMacro{\AtStockUpperLeft}
 %  \DescribeMacro{\AtStockLowerLeft}
-%  \DescribeMacro{\AtStockCenter} 
-%    Helper macros for easier positioning on the page. 
+%  \DescribeMacro{\AtStockCenter}
+%    Helper macros for easier positioning on the page.
 %
 %  \subsection{Package options}
 %  \begin{center}
@@ -179,24 +179,24 @@
 %      (the default). \\
 %    texcoord & empty or \textit{true}, \textit{false} & The zero point of
 %      the coordinate system is the upper left corner of the page. \\
-%    grid & empty or \textit{true}, \textit{false} & A grid is drawing; 
+%    grid & empty or \textit{true}, \textit{false} & A grid is drawing;
 %      default: false. \\
-%    gridunit & \textit{mm}, \textit{in}, \textit{bp}, \textit{pt} & Distance 
+%    gridunit & \textit{mm}, \textit{in}, \textit{bp}, \textit{pt} & Distance
 %      between gridlines are multiples of \texttt{gridunit}. default: mm.\\
-%    gridcolor & a valid color name & Color of the main gridlines; 
+%    gridcolor & a valid color name & Color of the main gridlines;
 %                                     default: black \\
-%    subgridcolor & a valid color name & Color of the subgridlines; 
+%    subgridcolor & a valid color name & Color of the subgridlines;
 %                                     default: black. \\
-%    subgridstyle & \textit{solid} or \textit{dotted} & `dotted' is very slow! 
+%    subgridstyle & \textit{solid} or \textit{dotted} & `dotted' is very slow!
 %      default: solid. \\
-%    colorgrid & empty or \textit{true}, \textit{false} & Shortcut for 
-%          `grid=true', `gridcolor=red' and `subgridcolor=green'; 
+%    colorgrid & empty or \textit{true}, \textit{false} & Shortcut for
+%          `grid=true', `gridcolor=red' and `subgridcolor=green';
 %          default: false.\\
-%    dvips        & empty or \textit{true}, \textit{false} & Is also true 
-%      if the package option \texttt{dvips} is 
-%      used by \pkgname{color} or \pkgname{graphics}. If true package 
-%      \pkgname{eepic} is loaded for better performance of dotted lines.   
-%    
+%    dvips        & empty or \textit{true}, \textit{false} & Is also true
+%      if the package option \texttt{dvips} is
+%      used by \pkgname{color} or \pkgname{graphics}. If true package
+%      \pkgname{eepic} is loaded for better performance of dotted lines.
+%
 %  \end{tabular}
 %  \end{center}
 %
@@ -301,6 +301,7 @@
 % \end{macro}
 % \begin{macro}{\AtTextUpperLeft}
 %  \changes{v2.0a}{2009/10/07}{Works now for class \clsname{memoir}}
+%  \changes{v2.0e}{2014/04/20}{Wrong horizontal position in one-column mode}
 %    \begin{macrocode}
 \ESO@isMEMOIR{%
   \newcommand\AtTextUpperLeft[1]{%
@@ -322,10 +323,14 @@
   \newcommand\AtTextUpperLeft[1]{%
     \begingroup
       \@tempdima=1in\relax
-      \ifodd\c@page
-        \advance\@tempdima\oddsidemargin
+      \if@twoside
+        \ifodd\c@page
+          \advance\@tempdima\oddsidemargin
+        \else
+          \advance\@tempdima\evensidemargin
+        \fi
       \else
-        \advance\@tempdima\evensidemargin
+        \advance\@tempdima\oddsidemargin
       \fi
       \@tempdimb=-1in\relax
       \advance\@tempdimb-\topmargin
@@ -333,7 +338,7 @@
       \advance\@tempdimb-\headsep
       \AtPageUpperLeft{%
         \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){#1}%
-      }%    
+      }%
     \endgroup
   }
 }
@@ -375,19 +380,19 @@
   \@ifstar{\g@addto@macro\ESO@HookIIBG}{\g@addto@macro\ESO@HookIBG}}
 \newcommand{\AddToShipoutPicture}{}
 \let\AddToShipoutPicture=\AddToShipoutPictureBG
-%    \end{macrocode}  
+%    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \begin{macro}{\AddToShipoutPictureFG}
 %    \begin{macrocode}
 \newcommand{\AddToShipoutPictureFG}{%
   \@ifstar{\g@addto@macro\ESO@HookIIFG}{\g@addto@macro\ESO@HookIFG}}
-%    \end{macrocode}  
-% \end{macro}  
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\ClearShipoutPictureBG}
 % \begin{macro}{\ClearShipoutPicture}
 % \begin{macro}{\ClearShipoutPictureFG}
-% \changes{v1.0a}{2002/10/07}{Changed \cmd{\let} to 
+% \changes{v1.0a}{2002/10/07}{Changed \cmd{\let} to
 %   \cmd{\global}\cmd{\let} (suggested by Alberto Lusiani).}
 %    \begin{macrocode}
 \newcommand{\ClearShipoutPictureBG}{\global\let\ESO@HookIBG\@empty}
@@ -448,7 +453,7 @@
     }%
   }
 }
-%    \end{macrocode}  
+%    \end{macrocode}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -475,7 +480,7 @@
 \newcommand*\ESO@hline[1]{\ESO@subgridlines\line(1,0){#1}}
 \newcommand*\ESO@vline[1]{\ESO@subgridlines\line(0,1){#1}}
 \newcommand*\ESO@Hline[1]{\ESO@gridlines\line(1,0){#1}}
-\newcommand*\ESO@Vline[1]{\ESO@gridlines\line(0,1){#1}}    
+\newcommand*\ESO@Vline[1]{\ESO@gridlines\line(0,1){#1}}
 \newcommand\ESO@fcolorbox[3]{\fbox{#3}}
 \newcommand\ESO@color[1]{}
 \newcommand\ESO@colorbox[2]{%
@@ -492,7 +497,7 @@
   \edef\ESO@gridDelta{#5}\edef\ESO@gap{#6}}
 %    \end{macrocode}
 % \end{macro}
-%  All the key-value options 
+%  All the key-value options
 %    \begin{macrocode}
 \define@key{ESO}{texcoord}[true]{\csname ESO@texcoord#1\endcsname}
 \define@key{ESO}{pscoord}[true]{\csname @tempswa#1\endcsname
@@ -514,20 +519,20 @@
     \def\@tempb{pt}
     \ifx\@tempa\@tempb
       \gridSetup[\@tempa]{\p@}{1}{10}{50}{2}
-    \else     
+    \else
       \def\@tempb{in}
       \ifx\@tempa\@tempb
         \gridSetup[\@tempa]{.1in}{.1}{2}{10}{.5}
-      \else 
+      \else
         \gridSetup[mm]{1mm}{1}{5}{20}{1}
       \fi
     \fi
-  \fi      
+  \fi
 }
 \setkeys{ESO}{subgridstyle=solid,pscoord=true,gridunit=mm}
 %    \end{macrocode}
 %    \begin{macro}{\ProcessOptionsWithKV}
-%    This macro can process package options using `key=value' syntax. 
+%    This macro can process package options using `key=value' syntax.
 %    \begin{macrocode}
 \def\ProcessOptionsWithKV#1{%
   \let\@tempc\@empty
@@ -540,24 +545,24 @@
   \AtEndOfPackage{\let\@unprocessedoptions\relax}}%
 %    \end{macrocode}
 %    \end{macro}
-%    \begin{macrocode}  
+%    \begin{macrocode}
 \ProcessOptionsWithKV{ESO}%
-%    \end{macrocode} 
+%    \end{macrocode}
 %    \begin{macro}{\ESO@div}
-%  Divides length |#1| by |#2| \(\times\) \cmd{\ESO@gridunit} and adds one. 
+%  Divides length |#1| by |#2| \(\times\) \cmd{\ESO@gridunit} and adds one.
 %  Result is in \cmd{\@tempcnta}.
 %    \begin{macrocode}
 \newcommand\ESO@div[2]{%
   \@tempdima=#1\relax\@tempdimb=\ESO@gridunit\relax
   \@tempdimb=#2\@tempdimb\divide\@tempdima by \@tempdimb
-  \@tempcnta\@tempdima\advance\@tempcnta\@ne}  
+  \@tempcnta\@tempdima\advance\@tempcnta\@ne}
 %    \end{macrocode}
 %    \end{macro}
-%  \changes{v1.1c}{2005/12/24}{Remove the disadvantageous check of 
+%  \changes{v1.1c}{2005/12/24}{Remove the disadvantageous check of
 %    `pdfTeX'. Now using with Xe\LaTeX\ should be possible.}
 %  \changes{v2.0a}{2009/10/07}{Better test of color/xcolor}
 %  \changes{v2.0d}{2013/10/06}{Improved color commands}
-%    \begin{macrocode} 
+%    \begin{macrocode}
 \@ifundefined{colorbox}{%
   \IfFileExists{xcolor.sty}{\RequirePackage{xcolor}}%
     {\RequirePackage{color}}%
@@ -583,7 +588,7 @@
       \filename@parse{\Gin@driver}\def\reserved@a{dvips}%
       \ifx\filename@base\reserved@a\ESO@dvipstrue\fi
     \fi
-  }% 
+  }%
   \ifESO@dvips\def\@tempb{eepic}\else\def\@tempb{epic}\fi
   \def\@tempa{dotted}%\def\ESO@gap{\LenToUnit{6\@wholewidth}}%
   \ifx\@tempa\ESO@subgridstyle
@@ -593,14 +598,14 @@
       \renewcommand*\ESO@hline[1]{\ESO@subgridlines\dottedline{\ESO@gap}%
         (0,0)(##1,0)}
       \renewcommand*\ESO@vline[1]{\ESO@subgridlines\dottedline{\ESO@gap}%
-        (0,0)(0,##1)} 
+        (0,0)(0,##1)}
     }{}
   \else
     \ifx\ESO@gridcolor\ESO@subgridcolor
       \renewcommand*\ESO@gridlines{\thicklines}
-    \fi       
+    \fi
   \fi
-} 
+}
 \ifESO@texcoord
   \def\ESO@yoffsetI{\z@}\def\ESO@yoffsetII{-\paperheight}
   \edef\ESO@griddeltaY{-\ESO@griddelta}\edef\ESO@gridDeltaY{-\ESO@gridDelta}
@@ -608,43 +613,43 @@
   \def\ESO@yoffsetI{-\paperheight}\def\ESO@yoffsetII{\z@}
   \edef\ESO@griddeltaY{\ESO@griddelta}\edef\ESO@gridDeltaY{\ESO@gridDelta}
 \fi
-%    \end{macrocode}  
+%    \end{macrocode}
 %    \begin{macro}{\ESO@gridpicture}
-%    \begin{macrocode} 
+%    \begin{macrocode}
 \newcommand\ESO@gridpicture{%
   \begingroup
     \setlength\unitlength{\ESO@gridunit}%
     \ESO@color{\ESO@subgridcolor}%
-%    \end{macrocode}     
+%    \end{macrocode}
 %    --- horizontal subgrid lines ---
-%    \begin{macrocode}    
+%    \begin{macrocode}
     \ESO@div{\paperheight}{\ESO@griddelta}%
     \multiput(0,0)(0,\ESO@griddeltaY){\@tempcnta}%
       {\ESO@hline{\LenToUnit{\paperwidth}}}%
-%    \end{macrocode}     
+%    \end{macrocode}
 %    --- vertical subgrid lines ---
-%    \begin{macrocode}  
+%    \begin{macrocode}
     \ESO@div{\paperwidth}{\ESO@griddelta}%
     \multiput(0,\LenToUnit{\ESO@yoffsetII})(\ESO@griddelta,0){\@tempcnta}%
       {\ESO@vline{\LenToUnit{\paperheight}}}%
     \ESO@color{\ESO@gridcolor}%
-%    \end{macrocode}     
+%    \end{macrocode}
 %    --- horizontal grid lines ---
-%    \begin{macrocode}     
+%    \begin{macrocode}
     \ESO@div{\paperheight}{\ESO@gridDelta}%
     \multiput(0,0)(0,\ESO@gridDeltaY){\@tempcnta}%
       {\ESO@Hline{\LenToUnit{\paperwidth}}}%
-%    \end{macrocode}     
+%    \end{macrocode}
 %    --- vertical grid lines ---
-%    \begin{macrocode}        
+%    \begin{macrocode}
     \ESO@div{\paperwidth}{\ESO@gridDelta}%
     \multiput(0,\LenToUnit{\ESO@yoffsetII})(\ESO@gridDelta,0){\@tempcnta}%
       {\ESO@Vline{\LenToUnit{\paperheight}}}%
-%    \end{macrocode}         
+%    \end{macrocode}
 %    --- horizontal numbers ---
 %  \changes{v1.1a}{2002/11/09}{Font setting added.}
-%    \begin{macrocode}   
-    \fontsize{10}{12}\normalfont%   
+%    \begin{macrocode}
+    \fontsize{10}{12}\normalfont%
     \ESO@div{\paperwidth}{\ESO@gridDelta}%
     \multiput(0,\ESO@gridDeltaY)(\ESO@gridDelta,0){\@tempcnta}{%
       \@tempcntb=\@tempcnta\advance\@tempcntb-\@multicnt
@@ -654,9 +659,9 @@
         \@tempcntb=\@tempdima%
         \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
       \fi}%
-%    \end{macrocode}        
+%    \end{macrocode}
 %    --- vertical numbers ---
-%    \begin{macrocode} 
+%    \begin{macrocode}
     \ifx\ESO@gridunitname\@empty\def\@tempa{0}\else\def\@tempa{1}\fi
     \ESO@div{\paperheight}{\ESO@gridDelta}%
     \multiput(\ESO@gridDelta,0)(0,\ESO@gridDeltaY){\@tempcnta}{%
@@ -666,9 +671,9 @@
         \@tempdima=\@tempcntb sp\@tempdima=\ESO@labelfactor\@tempdima
         \@tempcntb=\@tempdima
         \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
-      \fi      
-    }%     
-%    \end{macrocode}     
+      \fi
+    }%
+%    \end{macrocode}
 %    --- the unit label ---
 %    \begin{macrocode}
     \ifx\ESO@gridunitname\@empty\else
@@ -676,19 +681,19 @@
       \put(\ESO@gridDelta,\ESO@gridDeltaY){\makebox(0,0)[c]{%
         \ESO@fcolorbox{\ESO@gridcolor}{white}{%
           \textbf{\ESO@gridunitname}}}}%
-    \fi          
+    \fi
     \normalcolor%
   \endgroup
 }
-%    \end{macrocode}  
-%    \end{macro}    
-%  Add the grid to the shipout picture (\cmd{\ESO@HookIIIBG} is independed 
-%  from the user commands 
+%    \end{macrocode}
+%    \end{macro}
+%  Add the grid to the shipout picture (\cmd{\ESO@HookIIIBG} is independed
+%  from the user commands
 %  \cmd{\AddToShipoutPictureBG} and \cmd{\AddToShipoutPictureBG*}).
 %  \changes{v2.0d}{2013/10/06}{grid should be in foreground}
-%    \begin{macrocode}   
+%    \begin{macrocode}
 \ifESO@grid\g@addto@macro\ESO@HookIFG{\ESO@gridpicture}\fi
-%    \end{macrocode} 
+%    \end{macrocode}
 %
 % \Finale
 \endinput
