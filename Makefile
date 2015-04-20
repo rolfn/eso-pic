@@ -6,9 +6,10 @@ MAIN = eso-pic
 
 PDFLATEX = pdflatex
 TEX = tex
+EXAMPLES = $(wildcard eso*.tex)
 
 DIST_DIR = $(MAIN)
-DIST_FILES = $(MAIN).dtx $(MAIN).ins $(MAIN).pdf README $(wildcard eso*.tex) \
+DIST_FILES = $(MAIN).dtx $(MAIN).ins $(MAIN).pdf README $(EXAMPLES) \
   showframe.sty
 ARCHNAME = $(MAIN).zip
 
@@ -42,10 +43,10 @@ dist : $(DIST_FILES)
 	rm -rf $(DIST_DIR)
 
 clean :
-	$(RM) *.aux *.log *.glg *.glo *.gls *.idx *.ilg *.ind *.toc
+	$(RM) *.aux *.log *.glg *.glo *.gls *.idx *.ilg *.ind *.toc eso-pic.sty
 
 veryclean : clean
-	$(RM) $(MAIN).pdf $(MAIN).cls README $(ARCHNAME)
+	$(RM) $(MAIN).pdf $(MAIN).cls README $(ARCHNAME) $(EXAMPLES:.tex=.pdf)
 
 debug :
 	@echo $(ARCHNAME)
