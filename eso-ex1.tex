@@ -1,6 +1,6 @@
 
 % file `eso-ex1.tex'; a framed background example
-% Rolf Niepraschk, 2005-12-25, Rolf.Niepraschk@ptb.de
+% Rolf Niepraschk, 2015-07-14, Rolf.Niepraschk@gmx.de
 
 \documentclass[a4paper]{article}
 \usepackage{eso-pic,calc}
@@ -15,7 +15,7 @@
     \thicklines%
     \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdima}){%
       \framebox(\LenToUnit{\@tempdimb},\LenToUnit{\@tempdimc}){}}%
-  \endgroup  
+  \endgroup
 }
 \makeatother
 
@@ -26,14 +26,14 @@
   This page and all the following have a frame with 15~mm
   distance from the paper edges.\newpage
 
-  \section*{Second page} 
-  
+  \section*{Second page}
+
   \AddToShipoutPicture*{\put(100,100){\circle{40}}}
-  
-  Only this page has a circle on the lower left side. 
-  
+
+  Only this page has a circle on the lower left side.
+
   \newpage
 
   \section*{Last page}
-  
+
 \end{document}

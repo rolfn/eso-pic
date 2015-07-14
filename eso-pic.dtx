@@ -25,7 +25,7 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2015/04/20 v2.0e eso-pic (RN)]
+%<package>   [2015/07/14 v2.0f eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -37,7 +37,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{757}
+% \CheckSum{760}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -212,8 +212,10 @@
 % \begin{macro}{\LenToUnit}
 %  \changes{v1.0d}{2006/07/14}{Using \cmd{\providecommand} instead of
 %   \cmd{\newcommand} for \cmd{\LenToUnit}}
+%  \changes{v2.0f}{2015/07/14}{Changed definition for better compatibility
+%    with package \pkgname{curve2e} suggested by Claudio Beccari.}
 %    \begin{macrocode}
-\providecommand*\LenToUnit[1]{#1\@gobble}
+\providecommand*\LenToUnit[1]{\strip@pt\dimexpr#1*\p@/\unitlength}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\ESO@isMEMOIR}

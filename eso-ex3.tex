@@ -5,7 +5,7 @@
 %
 % A much better solution is Andreas' package `pdfpages'.
 %
-% Rolf Niepraschk, 2005-12-25, Rolf.Niepraschk@ptb.de
+% Rolf Niepraschk, 2015-07-14, Rolf.Niepraschk@gmx.de
 
 \documentclass[a4paper]{article}
 \usepackage[pdftex]{graphicx}%
@@ -29,7 +29,7 @@
     \stepcounter{thispdfpage}%
   }
 }
-   
+
 \begin{document}
 
 \section{First page of the main document}
@@ -37,6 +37,6 @@
 % import pages 1 to 3 of an external document.
 \includepdfpages{ltx3info.pdf}{1}{3}
 
-\section{First page after the imported pages of the external document} 
+\section{First page after the imported pages of the external document}
 
 \end{document}
