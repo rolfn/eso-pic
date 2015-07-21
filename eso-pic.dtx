@@ -37,7 +37,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{760}
+% \CheckSum{776}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -181,6 +181,8 @@
 %      the coordinate system is the upper left corner of the page. \\
 %    grid & empty or \textit{true}, \textit{false} & A grid is drawing;
 %      default: false. \\
+%    gridBG & empty or \textit{true}, \textit{false} & Put the grid in the
+%      background; default: false.\\
 %    gridunit & \textit{mm}, \textit{in}, \textit{bp}, \textit{pt} & Distance
 %      between gridlines are multiples of \texttt{gridunit}. default: mm.\\
 %    gridcolor & a valid color name & Color of the main gridlines;
@@ -360,13 +362,15 @@
 % \end{macro}
 % \DescribeMacro{\ESO@HookIBG}\DescribeMacro{\ESO@HookIIBG}
 % \DescribeMacro{\ESO@HookIIIBG}\DescribeMacro{\ESO@HookIFG}
-% \DescribeMacro{\ESO@HookIIFG}
+% \DescribeMacro{\ESO@HookIIFG}\DescribeMacro{\ESO@HookIIIFG}
+% \changes{v2.0g}{2015/07/21}{New macro \cmd{\ESO@HookIIIFG} for foreground grid.}
 %    \begin{macrocode}
 \newcommand{\ESO@HookIBG}{}
 \newcommand{\ESO@HookIIBG}{}
 \newcommand{\ESO@HookIIIBG}{}
 \newcommand{\ESO@HookIFG}{}
 \newcommand{\ESO@HookIIFG}{}
+\newcommand{\ESO@HookIIIFG}{}
 \newcommand{\ESO@HookI}{}
 \newcommand{\ESO@HookII}{}
 \newcommand{\ESO@HookIII}{}
@@ -433,7 +437,7 @@
     }%
     \AtBeginShipoutUpperLeftForeground{%
       \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){%
-        \ESO@HookIFG\ESO@HookIIFG
+        \ESO@HookIFG\ESO@HookIIFG\ESO@HookIIIFG
         \global\let\ESO@HookIIFG\@empty
       }%
     }%
@@ -449,7 +453,7 @@
     }%
     \AtBeginShipoutUpperLeftForeground{%
       \put(0,\LenToUnit{\ESO@yoffsetI}){%
-        \ESO@HookIFG\ESO@HookIIFG
+        \ESO@HookIFG\ESO@HookIIFG\ESO@HookIIIFG
         \global\let\ESO@HookIIFG\@empty
       }%
     }%
@@ -464,9 +468,10 @@
 \RequirePackage{keyval}
 %    \end{macrocode}
 %  Initialising some macros
+% \changes{v2.0g}{2015/07/21}{New \cmd{\ifESO@gridBG} for foreground/background grid.}
 %    \begin{macrocode}
 \newif\ifESO@dvips\ESO@dvipsfalse \newif\ifESO@grid\ESO@gridfalse
-\newif\ifESO@texcoord\ESO@texcoordfalse
+\newif\ifESO@texcoord\ESO@texcoordfalse \newif\ifESO@gridBG\ESO@gridBGfalse
 \newcommand*\ESO@gridunitname{}
 \newcommand*\ESO@gridunit{}
 \newcommand*\ESO@labelfactor{}
@@ -500,6 +505,7 @@
 %    \end{macrocode}
 % \end{macro}
 %  All the key-value options
+% \changes{v2.0g}{2015/07/21}{New option `gridBG'.}
 %    \begin{macrocode}
 \define@key{ESO}{texcoord}[true]{\csname ESO@texcoord#1\endcsname}
 \define@key{ESO}{pscoord}[true]{\csname @tempswa#1\endcsname
@@ -507,6 +513,7 @@
 \define@key{ESO}{dvips}[true]{\csname ESO@dvips#1\endcsname}
 \define@key{ESO}{grid}[true]{\csname ESO@grid#1\endcsname
   \setkeys{ESO}{gridcolor=black,subgridcolor=black}}
+\define@key{ESO}{gridBG}[true]{\csname ESO@gridBG#1\endcsname}
 \define@key{ESO}{colorgrid}[true]{\csname ESO@grid#1\endcsname
   \setkeys{ESO}{gridcolor=red,subgridcolor=green}}
 \define@key{ESO}{gridcolor}{\def\ESO@gridcolor{#1}}
@@ -689,12 +696,19 @@
 }
 %    \end{macrocode}
 %    \end{macro}
-%  Add the grid to the shipout picture (\cmd{\ESO@HookIIIBG} is independed
-%  from the user commands
+%  Add the grid to the shipout picture (\cmd{\ESO@HookIIIFG} or
+%  \cmd{\ESO@HookIIIBG}) is independed from the user commands
 %  \cmd{\AddToShipoutPictureBG} and \cmd{\AddToShipoutPictureBG*}).
 %  \changes{v2.0d}{2013/10/06}{grid should be in foreground}
+%  \changes{v2.0g}{2015/07/21}{Foreground/background grid.}
 %    \begin{macrocode}
-\ifESO@grid\g@addto@macro\ESO@HookIFG{\ESO@gridpicture}\fi
+\ifESO@grid
+  \ifESO@gridBG
+    \g@addto@macro\ESO@HookIIIBG{\ESO@gridpicture}%
+  \else
+    \g@addto@macro\ESO@HookIIIFG{\ESO@gridpicture}%
+  \fi
+\fi
 %    \end{macrocode}
 %
 % \Finale
