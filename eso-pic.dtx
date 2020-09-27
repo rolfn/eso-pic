@@ -25,7 +25,7 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2018/04/12 v2.0h eso-pic (RN)]
+%<package>   [2020/09/27 v2.0i eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -220,6 +220,15 @@
 \providecommand*\LenToUnit[1]{\strip@pt\dimexpr#1*\p@/\unitlength}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\ESO@tempdima}
+% \begin{macro}{\ESO@tempdimb}
+% Some auxiliary dimension registers
+%    \begin{macrocode}
+\newdimen\ESO@tempdima
+\newdimen\ESO@tempdimb
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
 % \begin{macro}{\ESO@isMEMOIR}
 %    Support for the \clsname{memoir} class.
 %    \begin{macrocode}
@@ -254,17 +263,17 @@
 \ESO@isMEMOIR{%
   \renewcommand\AtStockLowerLeft[1]{%
     \begingroup
-      \@tempdima=-\stockwidth
-      \advance\@tempdima\trimedge
-      \advance\@tempdima\paperwidth
+      \ESO@tempdima=-\stockwidth
+      \advance\ESO@tempdima\trimedge
+      \advance\ESO@tempdima\paperwidth
       \if@twoside\ifodd\c@page\else
-        \@tempdima=-\trimedge
+        \ESO@tempdima=-\trimedge
       \fi\fi
-      \@tempdimb=-\stockheight
-      \advance\@tempdimb\paperheight
-      \advance\@tempdimb\trimtop
+      \ESO@tempdimb=-\stockheight
+      \advance\ESO@tempdimb\paperheight
+      \advance\ESO@tempdimb\trimtop
       \AtPageLowerLeft{%
-        \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){#1}%
+        \put(\LenToUnit{\ESO@tempdima},\LenToUnit{\ESO@tempdimb}){#1}%
       }%
     \endgroup
   }
@@ -311,37 +320,37 @@
   \newcommand\AtTextUpperLeft[1]{%
     \begingroup
       \ifodd\c@page
-        \@tempdima=\spinemargin
+        \ESO@tempdima=\spinemargin
       \else
-        \@tempdima=\paperwidth
-        \advance\@tempdima-\textwidth
-        \advance\@tempdima-\spinemargin
+        \ESO@tempdima=\paperwidth
+        \advance\ESO@tempdima-\textwidth
+        \advance\ESO@tempdima-\spinemargin
       \fi
-      \@tempdimb=-\uppermargin
+      \ESO@tempdimb=-\uppermargin
       \AtPageUpperLeft{%
-        \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){#1}%
+        \put(\LenToUnit{\ESO@tempdima},\LenToUnit{\ESO@tempdimb}){#1}%
       }%
     \endgroup
   }
 }{%
   \newcommand\AtTextUpperLeft[1]{%
     \begingroup
-      \@tempdima=1in\relax
+      \ESO@tempdima=1in\relax
       \if@twoside
         \ifodd\c@page
-          \advance\@tempdima\oddsidemargin
+          \advance\ESO@tempdima\oddsidemargin
         \else
-          \advance\@tempdima\evensidemargin
+          \advance\ESO@tempdima\evensidemargin
         \fi
       \else
-        \advance\@tempdima\oddsidemargin
+        \advance\ESO@tempdima\oddsidemargin
       \fi
-      \@tempdimb=-1in\relax
-      \advance\@tempdimb-\topmargin
-      \advance\@tempdimb-\headheight
-      \advance\@tempdimb-\headsep
+      \ESO@tempdimb=-1in\relax
+      \advance\ESO@tempdimb-\topmargin
+      \advance\ESO@tempdimb-\headheight
+      \advance\ESO@tempdimb-\headsep
       \AtPageUpperLeft{%
-        \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){#1}%
+        \put(\LenToUnit{\ESO@tempdima},\LenToUnit{\ESO@tempdimb}){#1}%
       }%
     \endgroup
   }
@@ -418,25 +427,25 @@
 %    \begin{macrocode}
 \ESO@isMEMOIR{%
   \AtBeginShipout{%
-    \@tempdima=-\trimedge
-    \advance\@tempdima-\paperwidth
-    \advance\@tempdima\stockwidth
+    \ESO@tempdima=-\trimedge
+    \advance\ESO@tempdima-\paperwidth
+    \advance\ESO@tempdima\stockwidth
     \if@twoside\ifodd\c@page\else
-      \advance\@tempdima2\trimedge
-      \advance\@tempdima\paperwidth
-      \advance\@tempdima-\stockwidth
+      \advance\ESO@tempdima2\trimedge
+      \advance\ESO@tempdima\paperwidth
+      \advance\ESO@tempdima-\stockwidth
     \fi\fi
-    \@tempdimb=\ESO@yoffsetI
-    \advance\@tempdimb-\trimtop
+    \ESO@tempdimb=\ESO@yoffsetI
+    \advance\ESO@tempdimb-\trimtop
     \nointerlineskip
     \AtBeginShipoutUpperLeft{%
-      \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){%
+      \put(\LenToUnit{\ESO@tempdima},\LenToUnit{\ESO@tempdimb}){%
         \ESO@HookIIIBG\ESO@HookIBG\ESO@HookIIBG
         \global\let\ESO@HookIIBG\@empty
       }%
     }%
     \AtBeginShipoutUpperLeftForeground{%
-      \put(\LenToUnit{\@tempdima},\LenToUnit{\@tempdimb}){%
+      \put(\LenToUnit{\ESO@tempdima},\LenToUnit{\ESO@tempdimb}){%
         \ESO@HookIFG\ESO@HookIIFG\ESO@HookIIIFG
         \global\let\ESO@HookIIFG\@empty
       }%
@@ -566,9 +575,9 @@
 %  Result is in \cmd{\@tempcnta}.
 %    \begin{macrocode}
 \newcommand\ESO@div[2]{%
-  \@tempdima=#1\relax\@tempdimb=\ESO@gridunit\relax
-  \@tempdimb=#2\@tempdimb\divide\@tempdima by \@tempdimb
-  \@tempcnta\@tempdima\advance\@tempcnta\@ne}
+  \ESO@tempdima=#1\relax\ESO@tempdimb=\ESO@gridunit\relax
+  \ESO@tempdimb=#2\ESO@tempdimb\divide\ESO@tempdima by \ESO@tempdimb
+  \@tempcnta\ESO@tempdima\advance\@tempcnta\@ne}
 %    \end{macrocode}
 %    \end{macro}
 %  \changes{v1.1c}{2005/12/24}{Remove the disadvantageous check of
@@ -668,8 +677,8 @@
       \@tempcntb=\@tempcnta\advance\@tempcntb-\@multicnt
       \ifnum\@tempcntb>1\relax
         \multiply\@tempcntb by \ESO@gridDelta\relax
-        \@tempdima=\@tempcntb sp\@tempdima=\ESO@labelfactor\@tempdima
-        \@tempcntb=\@tempdima%
+        \ESO@tempdima=\@tempcntb sp\ESO@tempdima=\ESO@labelfactor\ESO@tempdima
+        \@tempcntb=\ESO@tempdima%
         \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
       \fi}%
 %    \end{macrocode}
@@ -681,8 +690,8 @@
       \@tempcntb=\@tempcnta\advance\@tempcntb-\@multicnt%
       \ifnum\@tempcntb>\@tempa\relax
         \multiply\@tempcntb by \ESO@gridDelta\relax%
-        \@tempdima=\@tempcntb sp\@tempdima=\ESO@labelfactor\@tempdima
-        \@tempcntb=\@tempdima
+        \ESO@tempdima=\@tempcntb sp\ESO@tempdima=\ESO@labelfactor\ESO@tempdima
+        \@tempcntb=\ESO@tempdima
         \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
       \fi
     }%
