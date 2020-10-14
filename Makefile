@@ -1,4 +1,4 @@
-# Rolf Niepraschk, 2015-07-14, Rolf.Niepraschk@gmx.de
+# Rolf Niepraschk, 2020-10-14, Rolf.Niepraschk@gmx.de
 
 .SUFFIXES : .tex .ltx .dvi .ps .pdf .eps
 
@@ -9,7 +9,7 @@ TEX = tex
 EXAMPLES = $(wildcard eso*.tex)
 
 DIST_DIR = $(MAIN)
-DIST_FILES = $(MAIN).dtx $(MAIN).ins $(MAIN).pdf README $(EXAMPLES) \
+DIST_FILES = $(MAIN).dtx $(MAIN).ins $(MAIN).pdf README.md $(EXAMPLES) \
   showframe.sty
 ARCHNAME = $(MAIN).zip
 
@@ -51,3 +51,4 @@ veryclean : clean
 
 debug :
 	@echo $(ARCHNAME)
+	@echo $(VERSION)
