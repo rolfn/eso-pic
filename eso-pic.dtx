@@ -21,9 +21,9 @@
 % \fi
 %
 % \iffalse
-%<package>\NeedsTeXFormat{LaTeX2e}[2020-10-01]
+%<package>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2020/10/14 v3.0a eso-pic (RN)]
+%<package>   [2023/03/23 v3.0b eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -35,7 +35,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{750}
+% \CheckSum{753}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -53,25 +53,6 @@
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% \iffalse meta-comment
-% ===================================================================
-%  @LaTeX-package-file{
-%    author         = {Rolf Niepraschk},
-%    version        = "v2.0i",
-%    date           = "12 Apr 2018",
-%    filename       = "eso-pic.sty",
-%    address        = "",
-%    telephone      = "",
-%    email          = "Rolf.Niepraschk@gmx.de",
-%    codetable      = "ISO/ASCII",
-%    keywords       = "LaTeX2e, \shipout, picture",
-%    dependences    = "atbegshi",
-%    supported      = "yes",
-%    docstring      = "LaTeX package which makes it easy to add some
-%                       picture commands to every page."
-%  }
-% ===================================================================
-% \fi
 %
 % \providecommand\env[1]{\textsf{#1}}
 % \providecommand\clsname[1]{\textsf{#1}}
@@ -571,6 +552,7 @@
 %    `pdfTeX'. Now using with Xe\LaTeX\ should be possible.}
 %  \changes{v2.0a}{2009/10/07}{Better test of color/xcolor}
 %  \changes{v2.0d}{2013/10/06}{Improved color commands}
+%  \changes{v3.0b}{2023/03/23}{More code inside \cmd{\AtBeginDocument}}
 %    \begin{macrocode}
 \@ifundefined{colorbox}{%
   \IfFileExists{xcolor.sty}{\RequirePackage{xcolor}}%
@@ -614,14 +596,15 @@
       \renewcommand*\ESO@gridlines{\thicklines}
     \fi
   \fi
+% \changes{v3.0b}{2023/03/23}{More code inside \cmd{\AtBeginDocument}}
+  \ifESO@texcoord
+    \def\ESO@yoffsetI{\z@}\def\ESO@yoffsetII{-\paperheight}
+    \edef\ESO@griddeltaY{-\ESO@griddelta}\edef\ESO@gridDeltaY{-\ESO@gridDelta}
+  \else
+    \def\ESO@yoffsetI{-\paperheight}\def\ESO@yoffsetII{\z@}
+    \edef\ESO@griddeltaY{\ESO@griddelta}\edef\ESO@gridDeltaY{\ESO@gridDelta}
+  \fi
 }
-\ifESO@texcoord
-  \def\ESO@yoffsetI{\z@}\def\ESO@yoffsetII{-\paperheight}
-  \edef\ESO@griddeltaY{-\ESO@griddelta}\edef\ESO@gridDeltaY{-\ESO@gridDelta}
-\else
-  \def\ESO@yoffsetI{-\paperheight}\def\ESO@yoffsetII{\z@}
-  \edef\ESO@griddeltaY{\ESO@griddelta}\edef\ESO@gridDeltaY{\ESO@gridDelta}
-\fi
 %    \end{macrocode}
 %    \begin{macro}{\ESO@gridpicture}
 %    \begin{macrocode}
