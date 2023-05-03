@@ -7,5 +7,7 @@ The pack­age adds one or more user com­mands to LaTeX’s shipout rou­tine, w
 may be used to place the out­put at fixed po­si­tions. The grid op­tion may be
 used to find the cor­rect places.
 
+See: https://github.com/rolfn/eso-pic
+
 Rolf Niepraschk 
 
