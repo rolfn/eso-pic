@@ -1,4 +1,4 @@
-# Rolf Niepraschk, 2020-10-14, Rolf.Niepraschk@gmx.de
+# Rolf Niepraschk, 2023-05-03, Rolf.Niepraschk@gmx.de
 
 .SUFFIXES : .tex .ltx .dvi .ps .pdf .eps
 
@@ -15,13 +15,13 @@ ARCHNAME = $(MAIN).zip
 
 all : $(MAIN).sty $(MAIN).pdf
 
-$(MAIN).sty : $(MAIN).dtx
-	$(TEX) $(basename $<).ins
+$(MAIN).sty : 
+	$(TEX) $(MAIN).ins
 
 $(MAIN)-manual.pdf : $(MAIN)-manual.tex $(MAIN).sty
 	$(PDFLATEX) $<
 
-$(MAIN).pdf : $(MAIN).dtx
+$(MAIN).pdf : $(MAIN).dtx $(MAIN).sty
 	$(PDFLATEX) $<
 	if ! test -f $(basename $<).glo ; then touch $(basename $<).glo; fi
 	if ! test -f $(basename $<).idx ; then touch $(basename $<).idx; fi
