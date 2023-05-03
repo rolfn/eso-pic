@@ -23,7 +23,7 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2023/03/23 v3.0b eso-pic (RN)]
+%<package>   [2023/05/03 v3.0c eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -35,7 +35,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{753}
+% \CheckSum{758}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -289,23 +289,28 @@
 % \begin{macro}{\AtTextUpperLeft}
 %  \changes{v2.0a}{2009/10/07}{Works now for class \clsname{memoir}}
 %  \changes{v2.0e}{2014/04/20}{Wrong horizontal position in one-column mode}
+%  \changes{v3.0c}{2023/05/03}{Wrong horizontal position in one-side mode (issue #5)}
 %    \begin{macrocode}
 \ESO@isMEMOIR{%
   \newcommand\AtTextUpperLeft[1]{%
     \begingroup
-      \ifodd\c@page
-        \ESO@tempdima=\spinemargin
+      \if@twoside
+        \ifodd\c@page
+          \ESO@tempdima=\spinemargin
+        \else
+          \ESO@tempdima=\paperwidth
+          \advance\ESO@tempdima-\textwidth
+          \advance\ESO@tempdima-\spinemargin
+        \fi
       \else
-        \ESO@tempdima=\paperwidth
-        \advance\ESO@tempdima-\textwidth
-        \advance\ESO@tempdima-\spinemargin
+        \ESO@tempdima=\spinemargin
       \fi
       \ESO@tempdimb=-\uppermargin
       \AtPageUpperLeft{%
         \put(\ESO@tempdima,\ESO@tempdimb){#1}%
       }%
     \endgroup
-  }
+  }%
 }{%
   \newcommand\AtTextUpperLeft[1]{%
     \begingroup
