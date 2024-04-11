@@ -15,7 +15,7 @@ ARCHNAME = $(MAIN).zip
 
 all : $(MAIN).sty $(MAIN).pdf
 
-$(MAIN).sty : 
+$(MAIN).sty :
 	$(TEX) $(MAIN).ins
 
 $(MAIN)-manual.pdf : $(MAIN)-manual.tex $(MAIN).sty
@@ -44,7 +44,7 @@ dist : $(DIST_FILES)
 	rm -rf $(DIST_DIR)
 
 clean :
-	$(RM) *.aux *.log *.glg *.glo *.gls *.idx *.ilg *.ind *.toc eso-pic.sty
+	$(RM) *.aux *.log *.glg *.glo *.gls *.idx *.ilg *.ind *.toc *.hd *.out eso-pic.sty
 
 veryclean : clean
 	$(RM) $(MAIN).pdf $(MAIN).cls README $(ARCHNAME) $(EXAMPLES:.tex=.pdf)
