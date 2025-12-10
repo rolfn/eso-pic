@@ -23,7 +23,7 @@
 % \iffalse
 %<package>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 %<package>\ProvidesPackage{eso-pic}
-%<package>   [2023/05/03 v3.0c eso-pic (RN)]
+%<package>   [2025/12/10 v3.0d eso-pic (RN)]
 %
 %<*driver>
 \documentclass[a4paper]{ltxdoc}
@@ -35,7 +35,7 @@
 %</driver>
 % \fi
 %
-% \CheckSum{758}
+% \CheckSum{756}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -415,7 +415,6 @@
     \ESO@tempdimb=\ESO@yoffsetI
     \advance\ESO@tempdimb-\trimtop
   }
-  \nointerlineskip
   \AddToHook{shipout/background}{%
     \ESO@MEMOIR@corr
     \put(\ESO@tempdima,\ESO@tempdimb){%
@@ -431,7 +430,6 @@
     }%
   }%
 }{%
-  \nointerlineskip
   \AddToHook{shipout/background}{%
     \put(0,\ESO@yoffsetI){%
       \ESO@HookIIIBG\ESO@HookIBG\ESO@HookIIBG
